@@ -6,19 +6,8 @@ function safeValue(obj) {
   return String(obj).replace(/"/g, '&quot;');
 }
 
-module.exports = function(src) {
+module.exports = function(cache) {
   return function(id, props) {
-    var image = src.files[src.map[id]],
-        sizes = Object.keys(image.sizes);
-
-    var srcSet = '';
-
-    if (sizes.length > 1) {
-      srcSet += ' srcset="' + sizes.map(function(size) {
-        return src.files[image.sizes[size]].path.absolute + ' ' + size;
-      }).join(', ') + '"';
-    }
-
     var attrs = '';
 
     if (typeof props === 'string') {
@@ -30,10 +19,26 @@ module.exports = function(src) {
       attrs += ' ' + prop + '="' + safeValue(props[prop]) + '"';
     }
 
+    var entry = cache.find(id);
+
+    if (!entry) {
+      return '<img src="' + id + '"' + attrs + '>';
+    }
+
+    var keys = Object.keys(entry.sizes);
+
+    var srcSet = '';
+
+    if (keys.length > 1) {
+      srcSet += ' srcset="' + keys.map(function(size) {
+        return cache.get(entry.sizes[size]).path.absolute + ' ' + size;
+      }).join(', ') + '"';
+    }
+
     return [
       '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="',
-      ' height="', image.height, '"',
-      ' width="', image.width, '"',
+      ' height="', entry.height, '"',
+      ' width="', entry.width, '"',
       srcSet,
       attrs,
       '>'
