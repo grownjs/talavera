@@ -1,0 +1,23 @@
+[class^="<%= selector %>-"], [class*=" <%= selector %>-"] {
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+<% images.forEach(function(img) { %>.<%= selector %>-<%= img.id %> {
+  background-image: url(<%= img.path.relative %>);
+}
+<% }) %>
+
+<% sizes.forEach(function(size) { %>
+@media only screen and (-webkit-min-device-pixel-ratio: <%= size.ratio %>),
+only screen and (min--moz-device-pixel-ratio: <%= size.ratio %>),
+only screen and (-o-min-device-pixel-ratio: <%= size.ratio %>/1),
+only screen and (min-device-pixel-ratio: <%= size.ratio %>),
+only screen and (min-resolution: <%= (96 * size.ratio) %>dpi),
+only screen and (min-resolution: <%= size.ratio %>dppx) {
+  <% size.images.forEach(function(img) { %>.<%= selector %>-<%= img.id %> {
+    background-image: url(<%= img.path.relative %>);
+  }
+  <% }) %>
+}
+<% }) %>
