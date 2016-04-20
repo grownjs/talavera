@@ -1,0 +1,37 @@
+i[class^="<%= selector %>-"], i[class*=" <%= selector %>-"] {
+  display: inline-block;
+  background-image: url(<%= image.path.relative %>);
+  font-size: 0;
+  background-repeat: no-repeat;
+  background-size: <%= image.width %>px <%= image.height %>px;
+}
+
+<% images.forEach(function(img) { %>i.<%= selector %>-<%= img.id %> {
+  width: <%= img.width %>px; height: <%= img.height %>px;
+  background-position: -<%= img.x %>px -<%= img.y %>px;
+}
+<% }) %>
+
+<% sizes.forEach(function(size) { %>
+@media only screen and (-webkit-min-device-pixel-ratio: <%= size.ratio %>),
+only screen and (min--moz-device-pixel-ratio: <%= size.ratio %>),
+only screen and (-o-min-device-pixel-ratio: <%= size.ratio %>/1),
+only screen and (min-device-pixel-ratio: <%= size.ratio %>),
+only screen and (min-resolution: <%= (96 * size.ratio) %>dpi),
+only screen and (min-resolution: <%= size.ratio %>dppx) {
+  i[class^="<%= selector %>-"], i[class*=" <%= selector %>-"] {
+    background-image: url(<%= size.image.path.relative %>);
+  }
+}
+<% }) %>
+
+<% breakpoints.forEach(function(bp) { %>
+@media screen and (max-width: <%= bp.width - 1 %>px) {
+<% bp.images.forEach(function(img) { %>  i.<%= selector %>-<%= img.id %> {
+    width: <%= img.width / bp.ratio %>px; height: <%= img.height / bp.ratio %>px;
+    background-position: -<%= img.x / bp.ratio %>px -<%= img.y / bp.ratio %>px;
+    background-size: <%= image.width / bp.ratio %>px <%= image.height / bp.ratio %>px;
+  }
+<% }) %>
+}
+<% }) %>
