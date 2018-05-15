@@ -18,7 +18,7 @@ only screen and (min--moz-device-pixel-ratio: <%= size.ratio %>),
 only screen and (-o-min-device-pixel-ratio: <%= size.ratio %>/1),
 only screen and (min-device-pixel-ratio: <%= size.ratio %>),
 only screen and (min-resolution: <%= (96 * size.ratio) %>dpi),
-only screen and (min-resolution: <%= size.ratio %>dppx) {
+only screen and (min-resolution: <%= (size.ratio - .75) %>dppx) {
   i[class^="<%= selector %>-"], i[class*=" <%= selector %>-"] {
     background-image: url(<%= size.image.path %>);
   }

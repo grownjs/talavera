@@ -1,8 +1,11 @@
 [class^="<%= selector %>-"], [class*=" <%= selector %>-"] {
+  font-size: 0;
+  display: inline-block;
   background-repeat: no-repeat;
 }
 
 <% images.forEach(function(img) { %>.<%= selector %>-<%= img.id %> {
+  width: <%= img.width %>px; height: <%= img.height %>px;
   background-image: url(<%= img.path %>);
 }
 <% }) %>
@@ -13,7 +16,7 @@ only screen and (min--moz-device-pixel-ratio: <%= size.ratio %>),
 only screen and (-o-min-device-pixel-ratio: <%= size.ratio %>/1),
 only screen and (min-device-pixel-ratio: <%= size.ratio %>),
 only screen and (min-resolution: <%= (96 * size.ratio) %>dpi),
-only screen and (min-resolution: <%= size.ratio %>dppx) {
+only screen and (min-resolution: <%= (size.ratio - .75) %>dppx) {
   <% size.images.forEach(function(img) { %>.<%= selector %>-<%= img.id %> {
     background-image: url(<%= img.path %>);
   }
