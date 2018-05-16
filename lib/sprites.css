@@ -7,7 +7,7 @@ i[class^="<%= selector %>-"], i[class*=" <%= selector %>-"] {
 }
 
 <% images.forEach(function(img) { %>i.<%= selector %>-<%= img.id %> {
-  width: <%= img.width %>px; height: <%= img.height %>px;
+  <% if (img.width && img.height) { %>width: <%= img.width %>px; height: <%= img.height %>px;<% } %>
   background-position: -<%= img.x %>px -<%= img.y %>px;
 }
 <% }) %>
@@ -28,7 +28,7 @@ only screen and (min-resolution: <%= (size.ratio - .75) %>dppx) {
 <% breakpoints.forEach(function(bp) { %>
 @media screen and (max-width: <%= bp.width - 1 %>px) {
 <% bp.images.forEach(function(img) { %>  i.<%= selector %>-<%= img.id %> {
-    width: <%= img.width / bp.ratio %>px; height: <%= img.height / bp.ratio %>px;
+    <% if (img.width && img.height) { %>width: <%= img.width / bp.ratio %>px; height: <%= img.height / bp.ratio %>px;<% } %>
     background-position: -<%= img.x / bp.ratio %>px -<%= img.y / bp.ratio %>px;
     background-size: <%= image.width / bp.ratio %>px <%= image.height / bp.ratio %>px;
   }

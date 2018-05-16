@@ -1,11 +1,14 @@
 [class^="<%= selector %>-"], [class*=" <%= selector %>-"] {
-  font-size: 0;
-  display: inline-block;
   background-repeat: no-repeat;
 }
 
+i[class^="<%= selector %>-"], i[class*=" <%= selector %>-"] {
+  font-size: 0;
+  display: inline-block;
+}
+
 <% images.forEach(function(img) { %>.<%= selector %>-<%= img.id %> {
-  width: <%= img.width %>px; height: <%= img.height %>px;
+  <% if (img.width && img.height) { %>width: <%= img.width %>px; height: <%= img.height %>px;<% } %>
   background-image: url(<%= img.path %>);
 }
 <% }) %>
