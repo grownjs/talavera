@@ -11,6 +11,6 @@
     "svg-sprite": "^1.5.0"
   },
   "devDependencies": {
-    "eslint": "^5.7.0"
+    "eslint": "^6.5.1"
   }
 }
