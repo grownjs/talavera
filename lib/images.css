@@ -1,5 +1,6 @@
 [class^="<%= selector %>-"], [class*=" <%= selector %>-"] {
   background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 i[class^="<%= selector %>-"], i[class*=" <%= selector %>-"] {
