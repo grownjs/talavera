@@ -1,5 +1,6 @@
 .DS_store
 *.log
 *.todo
+dist
 node_modules
 

@@ -3,6 +3,17 @@
   "version": "0.8.1",
   "license": "MIT",
   "main": "lib/index.js",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build:browser": "esbuild lib/preload.js --outfile=dist/preload.js --minify --bundle",
+    "build:nodejs": "esbuild lib/index.js --outfile=dist/talavera.js --bundle --platform=node --target=node10.23 --log-level=error",
+    "build": "npm run build:browser && npm run build:nodejs",
+    "prepublish": "npm run build",
+    "pretest": "eslint lib",
+    "test": "node test"
+  },
   "dependencies": {
     "fast-image-size": "^0.1.3",
     "jpeg-js": ">=0.4.0",
@@ -14,6 +25,8 @@
     "yargs-parser": ">=13.1.2"
   },
   "devDependencies": {
-    "eslint": "^7.8.1"
+    "esbuild": "^0.8.51",
+    "eslint": "^7.8.1",
+    "glob": "^7.1.6"
   }
 }
