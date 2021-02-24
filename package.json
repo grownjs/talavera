@@ -13,8 +13,7 @@
     "url": "https://github.com/pateketrueke/talavera"
   },
   "scripts": {
-    "build:browser": "esbuild lib/preload.js --outfile=dist/preload.js --minify --bundle",
-    "build": "npm run build:browser && npm run build:nodejs",
+    "build": "esbuild lib/preload.js --outfile=dist/preload.js --minify --bundle",
     "prepublish": "npm run build",
     "pretest": "eslint lib",
     "test": "node test"

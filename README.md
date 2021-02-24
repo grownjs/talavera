@@ -29,10 +29,10 @@ const { images, sprites } = talavera({
 const imageFiles = await images(ls('**/*.{svg,png}'));
 const spriteFiles = await sprites(ls('**/*.{gif,png,svg,jpg,jpeg}'));
 
-write(imageFiles);
-write(spriteFiles);
+save(imageFiles);
+save(spriteFiles);
 
-function write(files) {
+function save(files) {
   files.forEach(file => {
     if (typeof file.data === 'string') {
       write(file.dest, file.data);
