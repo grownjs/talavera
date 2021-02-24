@@ -17,28 +17,31 @@ async function main() {
   const a = await handlers.images(images);
   const b = await handlers.sprites(sprites);
 
-  assert.equal(a.length, 5);
-  assert.deepEqual(a[0], { src: 'social/github.png', dest: 'generated/social/github.png' });
-  assert.deepEqual(a[1], { src: 'social/twitter.png', dest: 'generated/social/twitter.png' });
-  assert.equal(a[2].dest, 'generated/images.css');
-  assert.ok(a[2].data.includes('url(social/github.png)'));
-  assert.ok(a[2].data.includes('url(social/twitter.png)'));
-  assert.equal(a[3].id, 'code-review');
-  assert.equal(a[3].root, 'github');
-  assert.equal(a[3].src, a[3].base);
-  assert.equal(a[3].src, 'github/code-review.svg');
-  assert.equal(a[3].dest, 'generated/github/code-review.svg');
-  assert.deepEqual(a[3].sizes, { '1x': 'github/code-review.svg' });
+  a.sort((x, y) => x.dest.localeCompare(y.dest));
+  b.sort((x, y) => x.dest.localeCompare(y.dest));
 
-  assert.equal(b.length, 3);
+  assert.equal(a.length, 5);
+  assert.deepEqual(a[3], { src: 'social/github.png', dest: 'generated/social/github.png' });
+  assert.deepEqual(a[4], { src: 'twitter.png', dest: 'generated/twitter.png' });
+  assert.equal(a[1].dest, 'generated/images/index.css');
+  assert.ok(a[1].data.includes('url(social/github.png)'));
+  assert.ok(a[1].data.includes('url(twitter.png)'));
+  assert.equal(a[0].id, 'code-review');
+  assert.equal(a[0].root, 'github');
+  assert.equal(a[0].src, a[0].base);
+  assert.equal(a[0].src, 'github/code-review.svg');
+  assert.equal(a[0].dest, 'generated/github/code-review.svg');
+  assert.deepEqual(a[0].sizes, { '1x': 'github/code-review.svg' });
+
+  assert.equal(b.length, 6);
   assert.equal(b[0].dest, 'generated/github.svg');
   assert.ok(b[0].data.includes('id="icon-code-review"'));
 
-  assert.equal(b[1].dest, 'generated/social.png');
-  assert.ok(b[1].data instanceof Buffer);
+  assert.equal(b[2].dest, 'generated/social.png');
+  assert.ok(b[2].data instanceof Buffer);
 
-  assert.equal(b[2].dest, 'generated/social.css');
-  assert.ok(b[2].data.includes('url(social.png)'));
+  assert.equal(b[1].dest, 'generated/social.css');
+  assert.ok(b[1].data.includes('url(social.png)'));
 }
 try {
   main().catch(e => {
@@ -46,6 +49,6 @@ try {
     process.exit(1);
   });
 } catch (e) {
-  console.error(e);
+  console.error(e.message);
   process.exit(1);
 }
