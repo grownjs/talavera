@@ -8,7 +8,6 @@ function lsFiles(filter) {
 async function main() {
   const handlers = talavera({
     cwd: __dirname,
-    out: '/tmp',
     chdir: true,
   });
 
