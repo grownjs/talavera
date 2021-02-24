@@ -2,14 +2,18 @@
   "name": "talavera",
   "version": "0.8.1",
   "license": "MIT",
-  "_main": "dist/talavera.js",
   "main": "lib/index.js",
   "files": [
-    "dist/*"
+    "dist/*",
+    "lib/*"
   ],
+  "author": "Alvaro Cabrera <pateketrueke@gmail.com> (https://soypache.co)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pateketrueke/talavera"
+  },
   "scripts": {
     "build:browser": "esbuild lib/preload.js --outfile=dist/preload.js --minify --bundle",
-    "build:nodejs": "esbuild lib/index.js --outfile=dist/talavera.js --bundle --platform=node --target=node10.23 --log-level=error",
     "build": "npm run build:browser && npm run build:nodejs",
     "prepublish": "npm run build",
     "pretest": "eslint lib",
@@ -20,14 +24,16 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "fast-image-size": "^0.1.3",
     "glob": "^7.1.6",
     "jpeg-js": ">=0.4.0",
-    "lodash.template": "^4.5.0",
     "minimist": ">=0.2.1",
-    "spritesmith": "^3.4.0",
     "static-eval": "^2.0.2",
-    "svg-sprite": "^1.5.0",
     "yargs-parser": ">=13.1.2"
+  },
+  "dependencies": {
+    "fast-image-size": "^0.1.3",
+    "lodash.template": "^4.5.0",
+    "spritesmith": "^3.4.0",
+    "svg-sprite": "^1.5.0"
   }
 }
