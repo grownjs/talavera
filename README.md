@@ -44,3 +44,6 @@ function save(files) {
   })
 }
 ```
+
+[![Build status](https://github.com/pateketrueke/talavera/workflows/ci/badge.svg)](https://github.com/pateketrueke/talavera/actions)
+[![NPM version](https://badge.fury.io/js/talavera.svg)](http://badge.fury.io/js/talavera)
