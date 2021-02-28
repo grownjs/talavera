@@ -21,7 +21,19 @@ async function main() {
   b.sort((x, y) => x.dest.localeCompare(y.dest));
 
   assert.equal(a.length, 5);
-  assert.deepEqual(a[3], { src: 'social/github.png', dest: 'generated/social/github.png' });
+  assert.deepEqual(a[3], {
+    id: 'github',
+    src: 'social/github.png',
+    dest: 'generated/social/github.png',
+    root: 'social',
+    path: 'generated/social/github.png',
+    href: 'social/github.png',
+    base: 'social/github.png',
+    sizes: { '1x': 'social/github.png' },
+    width: 512,
+    height: 512,
+    filesize: 7225,
+  });
   assert.equal(a[1].dest, 'generated/images/index.css');
   assert.ok(a[1].data.includes('url(social/github.png)'));
   assert.ok(a[1].data.includes('url(twitter.png)'));
