@@ -1,6 +1,6 @@
 {
   "name": "talavera",
-  "version": "0.9.3",
+  "version": "0.9.5",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
