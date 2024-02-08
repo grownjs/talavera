@@ -2,7 +2,7 @@ const assert = require('assert');
 const talavera = require('../lib');
 
 function lsFiles(filter) {
-  return require('glob').sync(filter, { cwd: __dirname }).map(file => `${__dirname}/${file}`);
+  return require('fast-glob').globSync(filter, { cwd: __dirname }).map(file => `${__dirname}/${file}`);
 }
 
 async function main() {
